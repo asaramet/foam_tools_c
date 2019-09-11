@@ -1,8 +1,24 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "get.h"
 #include "strings.h"
+
+#if 0
+void remove_spaces(char *string)
+{
+  char *temp = string;
+  do while (isspace(*string)) string++;
+  while ((*temp++ = *string++));
+}
+#endif
+
+char * remove_leading_spaces(char *string)
+{
+  while (isspace(*string)) string++;
+  return string;
+}
 
 char * dictionary(char *text, const char *name)
 { // get dictionary (name) data from text
@@ -28,4 +44,14 @@ char * dictionary(char *text, const char *name)
     flag--;
   }
   return cut_tail(result, strrchr(result, '}'));
+}
+
+char * keyvalue(char *text, char *keyword)
+{
+  char *segment;
+  if ((segment = strstr(text, keyword)) != NULL) {
+    char *tail = strstr(segment, ";");
+    return remove_leading_spaces(cut_tail(segment, tail) + strlen(keyword));
+  }
+  return NULL;
 }

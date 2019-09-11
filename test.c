@@ -27,10 +27,16 @@ int main(int argc, char *argv[]) {
 #endif
 
 int main(int argc, char const *argv[]) {
-  const char *segment = dictionary(command_stdout("foamDictionary"), "boundaryField");
+  char *foamDictionary = command_stdout("foamDictionary");
+
+  const char *segment = dictionary(foamDictionary, "outlet");
   if (segment != NULL) {
     printf("%s\n", segment);
-    return 0;
+  }
+
+  const char *flowVelocity = keyvalue(foamDictionary, "flowVelocity");
+  if (flowVelocity != NULL) {
+    printf("%s\n", flowVelocity);
   }
 
   printf("-=Over and out=-\n");
