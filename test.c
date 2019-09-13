@@ -28,16 +28,22 @@ int main(int argc, char *argv[]) {
 
 int main(int argc, char const *argv[]) {
   char *foamDictionary = command_stdout("foamDictionary");
-
+  /*
+  char *patchSummary = command_stdout("patchSummary");
+  printf("%s\n", patchSummary);
+  */
   const char *segment = dictionary(foamDictionary, "outlet");
-  if (segment != NULL) {
-    printf("%s\n", segment);
-  }
+  if (segment != NULL)
+    printf("== dictionary(foamDictionary, \"outlet\") ==\n%s\n", segment);
 
-  const char *flowVelocity = keyvalue(foamDictionary, "flowVelocity");
-  if (flowVelocity != NULL) {
-    printf("%s\n", flowVelocity);
-  }
+  if ((segment = keyvalue(foamDictionary, "flowVelocity")) != NULL)
+    printf("== keyvalue(foamDictionary, \"flowVelocity\") ==\n%s\n", segment);
+
+  if ((segment = cmd_dictionary("foamDictionary", "outlet")) != NULL)
+    printf("== cmd_dictionary(\"foamDictionary\", \"outlet\") ==\n%s\n", segment);
+
+  if ((segment = cmd_dictionary("foamDictionary", "keyword")) != NULL)
+    printf("== cmd_dictionary(\"foamDictionary\", \"keyword\") ==\n%s\n", segment);
 
   printf("-=Over and out=-\n");
   return 0;
