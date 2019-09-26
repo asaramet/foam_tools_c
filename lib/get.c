@@ -5,16 +5,10 @@
 #include "get.h"
 #include "strings.h"
 
-#define BUFFSIZE 128
-
-#if 0
-void remove_spaces(char *string)
-{
-  char *temp = string;
-  do while (isspace(*string)) string++;
-  while ((*temp++ = *string++));
-}
-#endif
+#define handle_error(msg) \
+  do { perror(msg); exit(EXIT_FAILURE); } while (0)
+#define error_null(msg) \
+  do { perror(msg); return NULL; } while (0)
 
 char * remove_leading_spaces(char *string)
 {
@@ -22,43 +16,17 @@ char * remove_leading_spaces(char *string)
   return string;
 }
 
-char * dictionary(char *text, const char *name)
-{ // get dictionary (name) data from text
-  char *segment, *tail, *got;
-
-  if ((segment = strstr(text, name) )== NULL) return NULL;
-  if ((segment = strstr(segment, "{")) == NULL ) return NULL;
-  if ((tail = strstr(segment, "}")) == NULL ) return NULL;
-
-  got = cut_tail(segment + 1, tail);
-  if (strstr(got, "{") == NULL) { return got; }
-
-  char *result = calloc(strlen(segment), sizeof(char));
-  int flag = 1;
-  while (flag != 0) {
-    flag += nr_strings(got, "{");
-    strcat(result, got);
-    strncat(result, tail, 1);
-    strcat(result, "\n");
-    segment = segment + 2 + strlen(got);
-    tail = strstr(segment, "}");
-    got = cut_tail(segment, tail);
-    flag--;
-  }
-  return cut_tail(result, strrchr(result, '}'));
-}
-
-char * keyvalue(char *text, char *keyword)
+char * keyvalue(char *streamline, const char *keyword)
 {
   char *segment;
-  if ((segment = strstr(text, keyword)) != NULL) {
+  if ((segment = strstr(streamline, keyword)) != NULL) {
     char *tail = strstr(segment, ";");
     return remove_leading_spaces(cut_tail(segment, tail) + strlen(keyword));
   }
   return NULL;
 }
 
-char * paragraph(char *text, char *start, char *end)
+char * paragraph(char *text, const char *start, const char *end)
 {
   //char *segment;
 
@@ -68,22 +36,23 @@ char * paragraph(char *text, char *start, char *end)
 }
 
 char * cmd_dictionary(char *bash, const char *name)
-{ // get dictionary from stdout of bash command (bash)
+{ // get dictionary from stdout of a shell command (bash)
   FILE *fp;
-  char streamline[BUFFSIZE];
+  char *streamline = NULL;
+  size_t len = 0;
   int flag = 0;
   char *output;
 
-  if ((fp = popen(bash, "r")) == NULL) return NULL;
+  if ((fp = popen(bash, "r")) == NULL) error_null("Error running bash command");
 
-  while (fgets(streamline, BUFFSIZE, fp) != NULL) {
+  while (getline(&streamline, &len, fp) != -1) {
     if (strstr(streamline, name) != NULL && flag == 0) {
       flag = 1;
+      output = "";
       continue;
     }
     if (strstr(streamline, "{") != NULL && flag == 1) {
       flag = 2;
-      output = "";
       continue;
     }
     if (flag > 1 && strstr(streamline, "{") != NULL) flag++;
@@ -97,6 +66,13 @@ char * cmd_dictionary(char *bash, const char *name)
       output = temp;
     }
   }
+  free(streamline);
   pclose(fp);
   return flag == 1 ? output : NULL;
+}
+
+char * dictionary(char *text, const char *name)
+{
+  if (strstr(text, name) == NULL) return NULL;
+  return NULL;
 }

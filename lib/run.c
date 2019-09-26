@@ -3,29 +3,32 @@
 #include "string.h"
 #include "run.h"
 
-#define BUFFSIZE 128
+#define handle_error(msg) \
+  do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
-char * command_stdout(char *cmd)
+char *cmd_out(char *command)
 {
-  FILE *fp;
-  char streamline[BUFFSIZE];
-  char *out;// = (char*) malloc(sizeof(char));
-  char *old = (char*) malloc(sizeof(char));
+  FILE *cmdpt = popen(command, "r");
+  char *data = (char *) calloc(1, sizeof(char));
+  char *streamline = NULL;
+  size_t dlength, slength, strlength = 0;
 
-  if ((fp = popen(cmd, "r")) == NULL) {
-    exit(EXIT_FAILURE);
-  }
+  if (cmdpt == NULL) handle_error("Failed popen");
 
-  while (fgets(streamline, BUFFSIZE, fp) != NULL) { // read a line from the stream
-    //out = malloc((strlen(old) + strlen(streamline)) * sizeof(char));
-    if (strstr(streamline, "/*--") == NULL) {
-      out = calloc((strlen(old) + strlen(streamline)), sizeof(char));
-      memmove(out, old, strlen(old));
-      strcat(out, streamline);
-      old = out;
+  while(getline(&streamline, &strlength, cmdpt) != -1) {
+    dlength = strlen(data);
+    slength = strlen(streamline);
+    if ((data = (char *) realloc(data, (dlength + slength + sizeof(char)))) == NULL) {
+      free(data);
+      free(streamline);
+      pclose(cmdpt);
+      handle_error("realloc failure");
     }
+    memmove(data+dlength, streamline, slength + sizeof(char));
+    free(streamline);
+    strlength = 0;
   }
 
-  pclose(fp);
-  return out;
+  pclose(cmdpt);
+  return data;
 }

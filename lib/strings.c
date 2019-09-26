@@ -15,6 +15,12 @@ char * cut_tail(char *text, char *tail)
   return result;
 }
 
+/* cut a portion from a text */
+char * cut_segment(char *text, char *start, char *end)
+{
+  return text;
+}
+
 /* number of strings in text */
 int nr_strings(char *text, char *string)
 {
