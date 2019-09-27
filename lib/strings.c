@@ -1,9 +1,10 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "strings.h"
 
 /* cut tail from text. Return new text without tail */
-char * cut_tail(char *text, char *tail)
+char *cut_tail(char *text, char *tail)
 {
   size_t rlength = strlen(text) - strlen(tail);
 
@@ -13,12 +14,6 @@ char * cut_tail(char *text, char *tail)
 
   memmove(result, text, rlength);
   return result;
-}
-
-/* cut a portion from a text */
-char * cut_segment(char *text, char *start, char *end)
-{
-  return text;
 }
 
 /* number of strings in text */
@@ -31,4 +26,23 @@ int nr_strings(char *text, char *string)
     text = strstr(text + strlen(string), string);
   }
   return nr;
+}
+
+/* cut a portion from a text starting at index 'start_index' till index 'end_index'*/
+char *text_segment(const char *text, const long start_index, long end_index)
+{
+  if (end_index < 0) end_index = strlen(text) + end_index;
+  if ((end_index - start_index) < 1) return NULL;
+
+  char *data = (char *) calloc(end_index - start_index + 1, sizeof(char));
+
+  memmove(data, text + start_index, end_index - start_index);
+  return data;
+}
+
+long position(const char *text, const char *subtext)
+{
+  char *got;
+  if ((got = strstr(text, subtext)) == NULL) return -1;
+  return strlen(text) - strlen(got);
 }

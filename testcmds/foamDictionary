@@ -27,68 +27,14 @@ boundaryField
     {
         type            cyclic;
     }
-    cyclicAMI
-    {
-        type            cyclicAMI;
-    }
-    cyclicACMI
-    {
-        type            cyclicACMI;
-        value           uniform 0.24;
-    }
-    cyclicSlip
-    {
-        type            cyclicSlip;
-    }
-    empty
-    {
-        type            empty;
-    }
-    nonuniformTransformCyclic
-    {
-        type            nonuniformTransformCyclic;
-    }
     processor
     {
         type            processor;
         value           uniform 0.24;
     }
-    processorCyclic
-    {
-        type            processorCyclic;
-        value           uniform 0.24;
-    }
-    symmetryPlane
-    {
-        type            symmetryPlane;
-    }
     symmetry
     {
         type            symmetry;
-    }
-    wedge
-    {
-        type            wedge;
-    }
-    overset
-    {
-        type            overset;
-    }
-    inlet
-    {
-        type            fixedValue;
-        value           uniform 0.24;
-    }
-    outlet
-    {
-        type            inletOutlet;
-        inletValue      uniform 0.24;
-        value           uniform 0.24;
-    }
-    lowerWall
-    {
-        type            kqRWallFunction;
-        value           uniform 0.24;
     }
     motorBikeGroup
     {

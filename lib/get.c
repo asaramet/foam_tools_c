@@ -10,19 +10,15 @@
 #define error_null(msg) \
   do { perror(msg); return NULL; } while (0)
 
-char * remove_leading_spaces(char *string)
-{
-  while (isspace(*string)) string++;
-  return string;
-}
-
 char * keyvalue(char *streamline, const char *keyword)
 {
+  /*
   char *segment;
   if ((segment = strstr(streamline, keyword)) != NULL) {
     char *tail = strstr(segment, ";");
     return remove_leading_spaces(cut_tail(segment, tail) + strlen(keyword));
   }
+  */
   return NULL;
 }
 
@@ -35,44 +31,21 @@ char * paragraph(char *text, const char *start, const char *end)
   return text;
 }
 
-char * cmd_dictionary(char *bash, const char *name)
-{ // get dictionary from stdout of a shell command (bash)
-  FILE *fp;
-  char *streamline = NULL;
-  size_t len = 0;
-  int flag = 0;
-  char *output;
-
-  if ((fp = popen(bash, "r")) == NULL) error_null("Error running bash command");
-
-  while (getline(&streamline, &len, fp) != -1) {
-    if (strstr(streamline, name) != NULL && flag == 0) {
-      flag = 1;
-      output = "";
-      continue;
-    }
-    if (strstr(streamline, "{") != NULL && flag == 1) {
-      flag = 2;
-      continue;
-    }
-    if (flag > 1 && strstr(streamline, "{") != NULL) flag++;
-    if (flag > 1  && strstr(streamline, "}") != NULL) flag--;
-    if (flag == 1 && strstr(streamline, "}") != NULL) break;
-
-    if (flag > 1) {
-      char *temp = calloc((strlen(output) + strlen(streamline)), sizeof(char));
-      memmove(temp, output, strlen(output));
-      strcat(temp, streamline);
-      output = temp;
-    }
-  }
-  free(streamline);
-  pclose(fp);
-  return flag == 1 ? output : NULL;
-}
-
 char * dictionary(char *text, const char *name)
 {
-  if (strstr(text, name) == NULL) return NULL;
-  return NULL;
+  char *segment, *tail;
+  if ((segment = strstr(text, name)) == NULL) return NULL;
+  if ((segment = strchr(segment, '{')) == NULL) return NULL;
+
+  long end = 0;
+  long flag = 0;
+  char *dct = NULL;
+  do {
+    if ((tail = strchr(segment + flag, '}')) == NULL) break;
+    free(dct);
+    end = position(segment, tail) + 1;
+    dct = text_segment(segment, 0, end);
+    flag = strlen(dct);
+  } while(nr_strings(dct, "{") != nr_strings(dct, "}"));
+  return dct;
 }
