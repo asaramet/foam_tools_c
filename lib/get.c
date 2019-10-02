@@ -37,8 +37,7 @@ char * dictionary(char *text, const char *name)
   if ((segment = strstr(text, name)) == NULL) return NULL;
   if ((segment = strchr(segment, '{')) == NULL) return NULL;
 
-  long end = 0;
-  long flag = 0;
+  long end = 0, flag = 0;
   char *dct = NULL;
   do {
     if ((tail = strchr(segment + flag, '}')) == NULL) break;

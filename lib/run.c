@@ -32,3 +32,17 @@ char *cmd_out(char *command)
   pclose(cmdpt);
   return data;
 }
+
+int update_path(char *folder)
+{
+  char *oldPath;
+  oldPath = getenv("PATH") == NULL ? "" : getenv("PATH");
+
+  char *path = calloc(strlen(oldPath) + strlen(folder) + 2, sizeof(char));
+
+  memmove(path, folder, strlen(folder));
+  strcat(path, ":");
+  strcat(path, oldPath);
+
+  return setenv("PATH", path, 1);
+}

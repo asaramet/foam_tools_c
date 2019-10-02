@@ -1,27 +1,34 @@
 CC = gcc -Wall -g
-LIBS = lib/get.c lib/run.c lib/strings.c
-O_LIBS= get.o run.o strings.o
-FILES = initials.c main.c test.c
-O_FILES = initials.o main.o
-OUT_EXE = foam.o
 
-build: $(FILES)
-	$(CC) -o atest.o test.c -Llib -loftools
+LIBSRC = lib/get.c lib/run.c lib/strings.c
+LIBOBJ= ${LIBSRC:%.c=%.o}
 
-	$(CC) -o initials.o initials.c -c
-	$(CC) -o main.o main.c -c
-	$(CC) -o $(OUT_EXE) $(O_FILES) -Llib -loftools
-	rm -f ${O_FILES}
+SRC = initials.c main.c
+OBJ = ${SRC:%.c=%.o}
 
-libs: ${LIBS}
-	${CC} -o strings.o -c lib/strings.c
-	${CC} -o get.o -c lib/get.c
-	${CC} -o run.o -c lib/run.c
-	ar rcs lib/liboftools.a ${O_LIBS}
+TESTSRC = test/unitstrings.c
+TESTOBJ = ${TESTSRC:%.c=%.o}
+
+EXE = foamTools
+ALLOBJ = ${OBJ} ${LIBOBJ} ${TESTOBJ}
+
+build: $(SRC)
+	$(foreach src,${SRC},${CC} -o $(src:%.c=%.o) $(src) -c;)
+	$(CC) -o $(EXE) $(OBJ) -Llib -loftools
+	rm -f ${OBJ}
+
+libs: ${LIBSRC}
+	$(foreach lib,${LIBSRC},${CC} -o $(lib:%.c=%.o) -c $(lib);)
+	ar rcs lib/liboftools.a ${LIBOBJ}
 	ranlib lib/liboftools.a
-	rm -f ${O_LIBS}
+	rm -f ${LIBOBJ}
+
+unittests:
+	$(CC) -o alltests alltests.c -Llib -loftools
 
 clean:
-	-rm -f *.o lib/*.a
+	-rm -f ${ALLOBJ} ${EXE} lib/*.a
+
+tests: clean libs unittests
 
 rebuild: clean libs build

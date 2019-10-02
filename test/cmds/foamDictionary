@@ -23,36 +23,20 @@ internalField   uniform 0.24;
 
 boundaryField
 {
-    cyclic
-    {
-        type            cyclic;
-    }
     processor
     {
         type            processor;
         value           uniform 0.24;
-    }
-    symmetry
-    {
-        type            symmetry;
     }
     motorBikeGroup
     {
         type            kqRWallFunction;
         value           uniform 0.24;
     }
-    upperWall
-    {
-        type            slip;
-    }
-    frontAndBack
-    {
-        type            slip;
-    }
 }
 Some more data may exist here:
 {
-  keyword
+  cascadedField
   {
     type test;
     inlet
