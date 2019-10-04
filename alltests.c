@@ -12,8 +12,13 @@
 #define handle_error(msg) \
   do { perror(msg); exit(EXIT_FAILURE); } while (0)
 
-static char * test_dictionary(char *input, char *output) {
+static char * test_strings(char *input, char *output) {
   string_assert(input, output);
+  return 0;
+}
+
+static char * test_null(char *in, char *out) {
+  null_assert(in, out);
   return 0;
 }
 
@@ -24,14 +29,20 @@ static char * all_tests() {
   char *segment, *output;
   segment = cmd_out("foamDictionary");
 
-  output = boundaryField;
-  string_test(test_dictionary, output, dictionary(segment, "boundaryField"));
+  output = boundaryField; // from test/outputget.h
+  two_run_test(test_strings, output, dictionary(segment, "boundaryField"));
 
   output = cascadedField;
-  string_test(test_dictionary, output, dictionary(segment, "cascadedField"));
+  two_run_test(test_strings, output, dictionary(segment, "cascadedField"));
 
   output = motorBikeGroup;
-  string_test(test_dictionary, output, dictionary(segment, "motorBikeGroup"));
+  two_run_test(test_strings, output, dictionary(segment, "motorBikeGroup"));
+
+  two_run_test(test_strings, "uniform 0.24", keyvalue(segment, "internalField"));
+  two_run_test(test_null, NULL, keyvalue(segment, "boundaryField"));
+  two_run_test(test_null, NULL, keyvalue(segment, "more"));
+
+  two_run_test(test_strings, "processor", keyvalue(dictionary(segment, "processor"), "type"));
 
   free(segment);
   return 0;

@@ -10,16 +10,18 @@
 #define error_null(msg) \
   do { perror(msg); return NULL; } while (0)
 
-char * keyvalue(char *streamline, const char *keyword)
+char * keyvalue(char *text, const char *keyword)
 {
-  /*
-  char *segment;
-  if ((segment = strstr(streamline, keyword)) != NULL) {
-    char *tail = strstr(segment, ";");
-    return remove_leading_spaces(cut_tail(segment, tail) + strlen(keyword));
-  }
-  */
-  return NULL;
+  char *found;
+  long end, newline;
+  if ((found = strstr(text, keyword)) == NULL) return NULL;
+  if ((newline = position(found, "\n")) == -1) return NULL;
+  if ((found = text_segment(found, strlen(keyword), newline)) == NULL) return NULL;
+  if ((end = position(found, ";")) == -1) return NULL;
+  found = text_segment(found, 0, end);
+  int i = 0;
+  while (isspace(found[i])) i++; //remove leading spaces
+  return found + i;
 }
 
 char * paragraph(char *text, const char *start, const char *end)
