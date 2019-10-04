@@ -3,11 +3,11 @@
 #include <errno.h>
 #include <limits.h> // for LONG_MAX
 #include <string.h>
-#include "lib/get.h"
-#include "lib/run.h"
-#include "lib/strings.h"
-#include "test/minunit.h"
-#include "test/outputget.h"
+#include "../lib/get.h"
+#include "../lib/run.h"
+#include "../lib/strings.h"
+#include "minunit.h"
+#include "outputget.h"
 
 #define handle_error(msg) \
   do { perror(msg); exit(EXIT_FAILURE); } while (0)

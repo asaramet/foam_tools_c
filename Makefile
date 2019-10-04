@@ -3,15 +3,14 @@ CC = gcc -Wall -g
 LIBSRC = lib/get.c lib/run.c lib/strings.c
 LIBOBJ= ${LIBSRC:%.c=%.o}
 
-SRC = initials.c main.c
+SRC = src/initials.c src/main.c
 OBJ = ${SRC:%.c=%.o}
 
-TESTSRC = test/unitstrings.c
-TESTOBJ = ${TESTSRC:%.c=%.o}
+TESTSRC = test/alltests.c
 TESTEXE = alltests
 
 EXE = foamTools
-ALLOBJ = ${OBJ} ${LIBOBJ} ${TESTOBJ}
+ALLOBJ = ${OBJ} ${LIBOBJ}
 
 build: $(SRC)
 	$(foreach src,${SRC},${CC} -o $(src:%.c=%.o) $(src) -c;)
@@ -25,7 +24,7 @@ libs: ${LIBSRC}
 	rm -f ${LIBOBJ}
 
 unittests:
-	$(CC) -o ${TESTEXE} alltests.c -Llib -loftools
+	$(CC) -o ${TESTEXE} ${TESTSRC} -Llib -loftools
 
 clean:
 	-rm -f ${ALLOBJ} ${EXE} ${TESTEXE} lib/*.a
