@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "initials.h"
 
 void help(char *progname)
@@ -27,12 +28,20 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  char *caseFolder;
+  for (int i = 1; i < argc; i++){
+    if (strcmp(argv[i], "-f") == 0 || strcmp(argv[i], "--folder") == 0) {
+      if ((caseFolder = argv[i+1]) != NULL) break;
+    }
+    caseFolder = getenv("PWD");
+  }
+
   for (char **pargv = argv+1; *pargv != argv[argc]; pargv++) {
     if (strcmp(*pargv, "-h") == 0 || strcmp(*pargv, "--help") == 0) {
       help(argv[0]);
       return 0;
     } else if (strcmp(*pargv, "-i") == 0) {
-      initials();
+      initials(caseFolder);
       return 0;
     }
   }

@@ -5,6 +5,7 @@
 #include "lib/get.h"
 #include "lib/run.h"
 
-int initials() {
+int initials(char *caseFolder) {
+  printf("case folder = %s\n", caseFolder);
   return 0;
 }

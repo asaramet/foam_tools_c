@@ -8,6 +8,7 @@ OBJ = ${SRC:%.c=%.o}
 
 TESTSRC = test/unitstrings.c
 TESTOBJ = ${TESTSRC:%.c=%.o}
+TESTEXE = alltests
 
 EXE = foamTools
 ALLOBJ = ${OBJ} ${LIBOBJ} ${TESTOBJ}
@@ -24,10 +25,10 @@ libs: ${LIBSRC}
 	rm -f ${LIBOBJ}
 
 unittests:
-	$(CC) -o alltests alltests.c -Llib -loftools
+	$(CC) -o ${TESTEXE} alltests.c -Llib -loftools
 
 clean:
-	-rm -f ${ALLOBJ} ${EXE} lib/*.a
+	-rm -f ${ALLOBJ} ${EXE} ${TESTEXE} lib/*.a
 
 tests: clean libs unittests
 
