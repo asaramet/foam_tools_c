@@ -33,6 +33,18 @@ char * paragraph(char *text, const char *start, const char *end)
   return text;
 }
 
+char * ofexec(char *text)
+{
+  char *executable;
+  if ((executable = strstr(text, "Exec")) == NULL) return NULL;
+  if ((executable = strstr(executable, ": ")) == NULL) return NULL;
+  executable += 2;
+  int i = 0;
+  while (! isspace(executable[i])) i++;
+  if (i == 0) return NULL;
+  return text_segment(executable, 0, i);
+}
+
 char * dictionary(char *text, const char *name)
 {
   char *segment, *tail;

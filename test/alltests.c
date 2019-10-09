@@ -44,6 +44,10 @@ static char * all_tests() {
 
   two_run_test(test_strings, "processor", keyvalue(dictionary(segment, "processor"), "type"));
 
+  two_run_test(test_strings, "patchSummary", ofexec(cmd_out("patchSummary")));
+  two_run_test(test_strings, "decomposePar", ofexec(cmd_out("decomposePar")));
+  two_run_test(test_strings, "simpleFoam", ofexec(cmd_out("simpleFoam")));
+
   free(segment);
   return 0;
 }

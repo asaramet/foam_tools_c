@@ -4,5 +4,6 @@
 char * dictionary(char *text, const char *name);
 char * keyvalue(char *text, const char *keyword);
 char * paragraph(char *text, const char *start, const char *end);
+char * ofexec(char *text);
 
 #endif // _GET_H_

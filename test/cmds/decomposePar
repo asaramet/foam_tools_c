@@ -1,0 +1,837 @@
+#!/usr/bin/env bash
+
+cat << EOF
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 6-76a8284120c3
+Exec   : decomposePar -copyZero
+Date   : May 21 2019
+Time   : 16:54:58
+Host   : "uc1n667.localdomain"
+PID    : 20916
+I/O    : uncollated
+Case   : /pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+
+
+Decomposing mesh region0
+
+Create mesh
+
+Calculating distribution of cells
+Selecting decompositionMethod hierarchical
+
+Finished decomposition in 0 s
+
+Calculating original mesh data
+
+Distributing cells to processors
+
+Distributing faces to processors
+
+Distributing points to processors
+
+Constructing processor meshes
+
+Processor 0
+    Number of cells = 22
+    Number of faces shared with processor 1 = 6
+    Number of faces shared with processor 7 = 11
+    Number of faces shared with processor 28 = 8
+    Number of processor patches = 3
+    Number of processor faces = 25
+    Number of boundary faces = 25
+
+Processor 1
+    Number of cells = 22
+    Number of faces shared with processor 0 = 6
+    Number of faces shared with processor 2 = 10
+    Number of faces shared with processor 8 = 11
+    Number of faces shared with processor 28 = 2
+    Number of faces shared with processor 29 = 4
+    Number of processor patches = 5
+    Number of processor faces = 33
+    Number of boundary faces = 17
+
+Processor 2
+    Number of cells = 22
+    Number of faces shared with processor 1 = 10
+    Number of faces shared with processor 3 = 11
+    Number of faces shared with processor 9 = 10
+    Number of faces shared with processor 29 = 1
+    Number of faces shared with processor 30 = 8
+    Number of faces shared with processor 36 = 1
+    Number of processor patches = 6
+    Number of processor faces = 41
+    Number of boundary faces = 17
+
+Processor 3
+    Number of cells = 22
+    Number of faces shared with processor 2 = 11
+    Number of faces shared with processor 4 = 7
+    Number of faces shared with processor 9 = 1
+    Number of faces shared with processor 10 = 10
+    Number of faces shared with processor 30 = 1
+    Number of faces shared with processor 31 = 8
+    Number of processor patches = 6
+    Number of processor faces = 38
+    Number of boundary faces = 16
+
+Processor 4
+    Number of cells = 22
+    Number of faces shared with processor 3 = 7
+    Number of faces shared with processor 5 = 7
+    Number of faces shared with processor 10 = 3
+    Number of faces shared with processor 11 = 12
+    Number of faces shared with processor 31 = 1
+    Number of faces shared with processor 32 = 8
+    Number of processor patches = 6
+    Number of processor faces = 38
+    Number of boundary faces = 16
+
+Processor 5
+    Number of cells = 22
+    Number of faces shared with processor 4 = 7
+    Number of faces shared with processor 6 = 7
+    Number of faces shared with processor 12 = 15
+    Number of faces shared with processor 32 = 1
+    Number of faces shared with processor 33 = 8
+    Number of processor patches = 5
+    Number of processor faces = 38
+    Number of boundary faces = 16
+
+Processor 6
+    Number of cells = 23
+    Number of faces shared with processor 5 = 7
+    Number of faces shared with processor 12 = 1
+    Number of faces shared with processor 13 = 14
+    Number of faces shared with processor 34 = 6
+    Number of processor patches = 4
+    Number of processor faces = 28
+    Number of boundary faces = 24
+
+Processor 7
+    Number of cells = 22
+    Number of faces shared with processor 0 = 11
+    Number of faces shared with processor 8 = 6
+    Number of faces shared with processor 14 = 11
+    Number of faces shared with processor 35 = 8
+    Number of processor patches = 4
+    Number of processor faces = 36
+    Number of boundary faces = 14
+
+Processor 8
+    Number of cells = 22
+    Number of faces shared with processor 1 = 11
+    Number of faces shared with processor 7 = 6
+    Number of faces shared with processor 9 = 6
+    Number of faces shared with processor 15 = 11
+    Number of faces shared with processor 35 = 2
+    Number of faces shared with processor 36 = 8
+    Number of processor patches = 6
+    Number of processor faces = 44
+    Number of boundary faces = 6
+
+Processor 9
+    Number of cells = 22
+    Number of faces shared with processor 2 = 10
+    Number of faces shared with processor 3 = 1
+    Number of faces shared with processor 8 = 6
+    Number of faces shared with processor 10 = 9
+    Number of faces shared with processor 16 = 14
+    Number of faces shared with processor 36 = 2
+    Number of faces shared with processor 37 = 4
+    Number of faces shared with processor 38 = 1
+    Number of processor patches = 8
+    Number of processor faces = 47
+    Number of boundary faces = 5
+
+Processor 10
+    Number of cells = 22
+    Number of faces shared with processor 3 = 10
+    Number of faces shared with processor 4 = 3
+    Number of faces shared with processor 9 = 9
+    Number of faces shared with processor 11 = 11
+    Number of faces shared with processor 16 = 1
+    Number of faces shared with processor 17 = 14
+    Number of faces shared with processor 31 = 1
+    Number of faces shared with processor 37 = 1
+    Number of faces shared with processor 38 = 7
+    Number of processor patches = 9
+    Number of processor faces = 57
+    Number of boundary faces = 5
+
+Processor 11
+    Number of cells = 22
+    Number of faces shared with processor 4 = 12
+    Number of faces shared with processor 10 = 11
+    Number of faces shared with processor 12 = 7
+    Number of faces shared with processor 17 = 1
+    Number of faces shared with processor 18 = 10
+    Number of faces shared with processor 19 = 1
+    Number of faces shared with processor 32 = 1
+    Number of faces shared with processor 38 = 1
+    Number of faces shared with processor 39 = 8
+    Number of processor patches = 9
+    Number of processor faces = 52
+    Number of boundary faces = 6
+
+Processor 12
+    Number of cells = 22
+    Number of faces shared with processor 5 = 15
+    Number of faces shared with processor 6 = 1
+    Number of faces shared with processor 11 = 7
+    Number of faces shared with processor 13 = 6
+    Number of faces shared with processor 18 = 1
+    Number of faces shared with processor 19 = 14
+    Number of faces shared with processor 33 = 1
+    Number of faces shared with processor 39 = 1
+    Number of faces shared with processor 40 = 8
+    Number of processor patches = 9
+    Number of processor faces = 54
+    Number of boundary faces = 6
+
+Processor 13
+    Number of cells = 23
+    Number of faces shared with processor 6 = 14
+    Number of faces shared with processor 12 = 6
+    Number of faces shared with processor 19 = 2
+    Number of faces shared with processor 20 = 15
+    Number of faces shared with processor 41 = 6
+    Number of processor patches = 5
+    Number of processor faces = 43
+    Number of boundary faces = 13
+
+Processor 14
+    Number of cells = 22
+    Number of faces shared with processor 7 = 11
+    Number of faces shared with processor 15 = 6
+    Number of faces shared with processor 21 = 11
+    Number of faces shared with processor 42 = 8
+    Number of processor patches = 4
+    Number of processor faces = 36
+    Number of boundary faces = 14
+
+Processor 15
+    Number of cells = 22
+    Number of faces shared with processor 8 = 11
+    Number of faces shared with processor 14 = 6
+    Number of faces shared with processor 16 = 6
+    Number of faces shared with processor 22 = 11
+    Number of faces shared with processor 42 = 2
+    Number of faces shared with processor 43 = 8
+    Number of processor patches = 6
+    Number of processor faces = 44
+    Number of boundary faces = 6
+
+Processor 16
+    Number of cells = 22
+    Number of faces shared with processor 9 = 14
+    Number of faces shared with processor 10 = 1
+    Number of faces shared with processor 15 = 6
+    Number of faces shared with processor 17 = 6
+    Number of faces shared with processor 23 = 14
+    Number of faces shared with processor 43 = 2
+    Number of faces shared with processor 44 = 8
+    Number of processor patches = 7
+    Number of processor faces = 51
+    Number of boundary faces = 5
+
+Processor 17
+    Number of cells = 22
+    Number of faces shared with processor 10 = 14
+    Number of faces shared with processor 11 = 1
+    Number of faces shared with processor 16 = 6
+    Number of faces shared with processor 18 = 7
+    Number of faces shared with processor 23 = 1
+    Number of faces shared with processor 24 = 12
+    Number of faces shared with processor 44 = 1
+    Number of faces shared with processor 45 = 7
+    Number of processor patches = 8
+    Number of processor faces = 49
+    Number of boundary faces = 7
+
+Processor 18
+    Number of cells = 22
+    Number of faces shared with processor 11 = 10
+    Number of faces shared with processor 12 = 1
+    Number of faces shared with processor 17 = 7
+    Number of faces shared with processor 19 = 13
+    Number of faces shared with processor 24 = 1
+    Number of faces shared with processor 25 = 14
+    Number of faces shared with processor 39 = 1
+    Number of faces shared with processor 45 = 3
+    Number of faces shared with processor 46 = 7
+    Number of processor patches = 9
+    Number of processor faces = 57
+    Number of boundary faces = 5
+
+Processor 19
+    Number of cells = 22
+    Number of faces shared with processor 11 = 1
+    Number of faces shared with processor 12 = 14
+    Number of faces shared with processor 13 = 2
+    Number of faces shared with processor 18 = 13
+    Number of faces shared with processor 20 = 6
+    Number of faces shared with processor 26 = 11
+    Number of faces shared with processor 40 = 1
+    Number of faces shared with processor 46 = 1
+    Number of faces shared with processor 47 = 8
+    Number of faces shared with processor 53 = 1
+    Number of processor patches = 10
+    Number of processor faces = 58
+    Number of boundary faces = 4
+
+Processor 20
+    Number of cells = 23
+    Number of faces shared with processor 13 = 15
+    Number of faces shared with processor 19 = 6
+    Number of faces shared with processor 26 = 3
+    Number of faces shared with processor 27 = 13
+    Number of faces shared with processor 48 = 6
+    Number of processor patches = 5
+    Number of processor faces = 43
+    Number of boundary faces = 13
+
+Processor 21
+    Number of cells = 23
+    Number of faces shared with processor 14 = 11
+    Number of faces shared with processor 22 = 7
+    Number of faces shared with processor 42 = 1
+    Number of faces shared with processor 49 = 8
+    Number of processor patches = 4
+    Number of processor faces = 27
+    Number of boundary faces = 25
+
+Processor 22
+    Number of cells = 23
+    Number of faces shared with processor 15 = 11
+    Number of faces shared with processor 21 = 7
+    Number of faces shared with processor 23 = 7
+    Number of faces shared with processor 43 = 1
+    Number of faces shared with processor 49 = 1
+    Number of faces shared with processor 50 = 8
+    Number of processor patches = 6
+    Number of processor faces = 35
+    Number of boundary faces = 17
+
+Processor 23
+    Number of cells = 23
+    Number of faces shared with processor 16 = 14
+    Number of faces shared with processor 17 = 1
+    Number of faces shared with processor 22 = 7
+    Number of faces shared with processor 24 = 6
+    Number of faces shared with processor 50 = 1
+    Number of faces shared with processor 51 = 9
+    Number of processor patches = 6
+    Number of processor faces = 38
+    Number of boundary faces = 18
+
+Processor 24
+    Number of cells = 23
+    Number of faces shared with processor 17 = 12
+    Number of faces shared with processor 18 = 1
+    Number of faces shared with processor 23 = 6
+    Number of faces shared with processor 25 = 6
+    Number of faces shared with processor 45 = 1
+    Number of faces shared with processor 51 = 2
+    Number of faces shared with processor 52 = 8
+    Number of processor patches = 7
+    Number of processor faces = 36
+    Number of boundary faces = 18
+
+Processor 25
+    Number of cells = 23
+    Number of faces shared with processor 18 = 14
+    Number of faces shared with processor 24 = 6
+    Number of faces shared with processor 26 = 7
+    Number of faces shared with processor 52 = 2
+    Number of faces shared with processor 53 = 9
+    Number of processor patches = 5
+    Number of processor faces = 38
+    Number of boundary faces = 18
+
+Processor 26
+    Number of cells = 23
+    Number of faces shared with processor 19 = 11
+    Number of faces shared with processor 20 = 3
+    Number of faces shared with processor 25 = 7
+    Number of faces shared with processor 27 = 12
+    Number of faces shared with processor 53 = 2
+    Number of faces shared with processor 54 = 4
+    Number of processor patches = 6
+    Number of processor faces = 39
+    Number of boundary faces = 19
+
+Processor 27
+    Number of cells = 23
+    Number of faces shared with processor 20 = 13
+    Number of faces shared with processor 26 = 12
+    Number of faces shared with processor 55 = 6
+    Number of processor patches = 3
+    Number of processor faces = 31
+    Number of boundary faces = 25
+
+Processor 28
+    Number of cells = 23
+    Number of faces shared with processor 0 = 8
+    Number of faces shared with processor 1 = 2
+    Number of faces shared with processor 29 = 11
+    Number of faces shared with processor 35 = 12
+    Number of faces shared with processor 36 = 2
+    Number of processor patches = 5
+    Number of processor faces = 35
+    Number of boundary faces = 25
+
+Processor 29
+    Number of cells = 23
+    Number of faces shared with processor 1 = 4
+    Number of faces shared with processor 2 = 1
+    Number of faces shared with processor 28 = 11
+    Number of faces shared with processor 30 = 7
+    Number of faces shared with processor 35 = 1
+    Number of faces shared with processor 36 = 10
+    Number of processor patches = 6
+    Number of processor faces = 34
+    Number of boundary faces = 18
+
+Processor 30
+    Number of cells = 23
+    Number of faces shared with processor 2 = 8
+    Number of faces shared with processor 3 = 1
+    Number of faces shared with processor 29 = 7
+    Number of faces shared with processor 31 = 7
+    Number of faces shared with processor 37 = 12
+    Number of processor patches = 5
+    Number of processor faces = 35
+    Number of boundary faces = 17
+
+Processor 31
+    Number of cells = 23
+    Number of faces shared with processor 3 = 8
+    Number of faces shared with processor 4 = 1
+    Number of faces shared with processor 10 = 1
+    Number of faces shared with processor 30 = 7
+    Number of faces shared with processor 32 = 7
+    Number of faces shared with processor 38 = 11
+    Number of processor patches = 6
+    Number of processor faces = 35
+    Number of boundary faces = 17
+
+Processor 32
+    Number of cells = 23
+    Number of faces shared with processor 4 = 8
+    Number of faces shared with processor 5 = 1
+    Number of faces shared with processor 11 = 1
+    Number of faces shared with processor 31 = 7
+    Number of faces shared with processor 33 = 7
+    Number of faces shared with processor 39 = 11
+    Number of processor patches = 6
+    Number of processor faces = 35
+    Number of boundary faces = 17
+
+Processor 33
+    Number of cells = 23
+    Number of faces shared with processor 5 = 8
+    Number of faces shared with processor 12 = 1
+    Number of faces shared with processor 32 = 7
+    Number of faces shared with processor 34 = 8
+    Number of faces shared with processor 40 = 11
+    Number of processor patches = 5
+    Number of processor faces = 35
+    Number of boundary faces = 17
+
+Processor 34
+    Number of cells = 24
+    Number of faces shared with processor 6 = 6
+    Number of faces shared with processor 33 = 8
+    Number of faces shared with processor 41 = 12
+    Number of processor patches = 3
+    Number of processor faces = 26
+    Number of boundary faces = 26
+
+Processor 35
+    Number of cells = 23
+    Number of faces shared with processor 7 = 8
+    Number of faces shared with processor 8 = 2
+    Number of faces shared with processor 28 = 12
+    Number of faces shared with processor 29 = 1
+    Number of faces shared with processor 36 = 11
+    Number of faces shared with processor 42 = 17
+    Number of processor patches = 6
+    Number of processor faces = 51
+    Number of boundary faces = 13
+
+Processor 36
+    Number of cells = 23
+    Number of faces shared with processor 2 = 1
+    Number of faces shared with processor 8 = 8
+    Number of faces shared with processor 9 = 2
+    Number of faces shared with processor 28 = 2
+    Number of faces shared with processor 29 = 10
+    Number of faces shared with processor 35 = 11
+    Number of faces shared with processor 37 = 11
+    Number of faces shared with processor 43 = 12
+    Number of processor patches = 8
+    Number of processor faces = 57
+    Number of boundary faces = 7
+
+Processor 37
+    Number of cells = 23
+    Number of faces shared with processor 9 = 4
+    Number of faces shared with processor 10 = 1
+    Number of faces shared with processor 30 = 12
+    Number of faces shared with processor 36 = 11
+    Number of faces shared with processor 38 = 7
+    Number of faces shared with processor 43 = 1
+    Number of faces shared with processor 44 = 10
+    Number of processor patches = 7
+    Number of processor faces = 46
+    Number of boundary faces = 6
+
+Processor 38
+    Number of cells = 23
+    Number of faces shared with processor 9 = 1
+    Number of faces shared with processor 10 = 7
+    Number of faces shared with processor 11 = 1
+    Number of faces shared with processor 31 = 11
+    Number of faces shared with processor 37 = 7
+    Number of faces shared with processor 39 = 7
+    Number of faces shared with processor 44 = 1
+    Number of faces shared with processor 45 = 11
+    Number of processor patches = 8
+    Number of processor faces = 46
+    Number of boundary faces = 6
+
+Processor 39
+    Number of cells = 23
+    Number of faces shared with processor 11 = 8
+    Number of faces shared with processor 12 = 1
+    Number of faces shared with processor 18 = 1
+    Number of faces shared with processor 32 = 11
+    Number of faces shared with processor 38 = 7
+    Number of faces shared with processor 40 = 7
+    Number of faces shared with processor 46 = 11
+    Number of processor patches = 7
+    Number of processor faces = 46
+    Number of boundary faces = 6
+
+Processor 40
+    Number of cells = 23
+    Number of faces shared with processor 12 = 8
+    Number of faces shared with processor 19 = 1
+    Number of faces shared with processor 33 = 11
+    Number of faces shared with processor 39 = 7
+    Number of faces shared with processor 41 = 8
+    Number of faces shared with processor 47 = 11
+    Number of processor patches = 6
+    Number of processor faces = 46
+    Number of boundary faces = 6
+
+Processor 41
+    Number of cells = 24
+    Number of faces shared with processor 13 = 6
+    Number of faces shared with processor 34 = 12
+    Number of faces shared with processor 40 = 8
+    Number of faces shared with processor 48 = 12
+    Number of processor patches = 4
+    Number of processor faces = 38
+    Number of boundary faces = 14
+
+Processor 42
+    Number of cells = 23
+    Number of faces shared with processor 14 = 8
+    Number of faces shared with processor 15 = 2
+    Number of faces shared with processor 21 = 1
+    Number of faces shared with processor 35 = 17
+    Number of faces shared with processor 43 = 7
+    Number of faces shared with processor 49 = 14
+    Number of processor patches = 6
+    Number of processor faces = 49
+    Number of boundary faces = 11
+
+Processor 43
+    Number of cells = 23
+    Number of faces shared with processor 15 = 8
+    Number of faces shared with processor 16 = 2
+    Number of faces shared with processor 22 = 1
+    Number of faces shared with processor 36 = 12
+    Number of faces shared with processor 37 = 1
+    Number of faces shared with processor 42 = 7
+    Number of faces shared with processor 44 = 11
+    Number of faces shared with processor 49 = 1
+    Number of faces shared with processor 50 = 13
+    Number of processor patches = 9
+    Number of processor faces = 56
+    Number of boundary faces = 4
+
+Processor 44
+    Number of cells = 23
+    Number of faces shared with processor 16 = 8
+    Number of faces shared with processor 17 = 1
+    Number of faces shared with processor 37 = 10
+    Number of faces shared with processor 38 = 1
+    Number of faces shared with processor 43 = 11
+    Number of faces shared with processor 45 = 11
+    Number of faces shared with processor 50 = 1
+    Number of faces shared with processor 51 = 11
+    Number of processor patches = 8
+    Number of processor faces = 54
+    Number of boundary faces = 6
+
+Processor 45
+    Number of cells = 23
+    Number of faces shared with processor 17 = 7
+    Number of faces shared with processor 18 = 3
+    Number of faces shared with processor 24 = 1
+    Number of faces shared with processor 38 = 11
+    Number of faces shared with processor 44 = 11
+    Number of faces shared with processor 46 = 8
+    Number of faces shared with processor 52 = 11
+    Number of processor patches = 7
+    Number of processor faces = 52
+    Number of boundary faces = 6
+
+Processor 46
+    Number of cells = 23
+    Number of faces shared with processor 18 = 7
+    Number of faces shared with processor 19 = 1
+    Number of faces shared with processor 39 = 11
+    Number of faces shared with processor 45 = 8
+    Number of faces shared with processor 47 = 7
+    Number of faces shared with processor 52 = 1
+    Number of faces shared with processor 53 = 11
+    Number of processor patches = 7
+    Number of processor faces = 46
+    Number of boundary faces = 6
+
+Processor 47
+    Number of cells = 23
+    Number of faces shared with processor 19 = 8
+    Number of faces shared with processor 40 = 11
+    Number of faces shared with processor 46 = 7
+    Number of faces shared with processor 48 = 8
+    Number of faces shared with processor 54 = 12
+    Number of processor patches = 5
+    Number of processor faces = 46
+    Number of boundary faces = 6
+
+Processor 48
+    Number of cells = 24
+    Number of faces shared with processor 20 = 6
+    Number of faces shared with processor 41 = 12
+    Number of faces shared with processor 47 = 8
+    Number of faces shared with processor 55 = 12
+    Number of processor patches = 4
+    Number of processor faces = 38
+    Number of boundary faces = 14
+
+Processor 49
+    Number of cells = 24
+    Number of faces shared with processor 21 = 8
+    Number of faces shared with processor 22 = 1
+    Number of faces shared with processor 42 = 14
+    Number of faces shared with processor 43 = 1
+    Number of faces shared with processor 50 = 7
+    Number of processor patches = 5
+    Number of processor faces = 31
+    Number of boundary faces = 25
+
+Processor 50
+    Number of cells = 24
+    Number of faces shared with processor 22 = 8
+    Number of faces shared with processor 23 = 1
+    Number of faces shared with processor 43 = 13
+    Number of faces shared with processor 44 = 1
+    Number of faces shared with processor 49 = 7
+    Number of faces shared with processor 51 = 8
+    Number of processor patches = 6
+    Number of processor faces = 38
+    Number of boundary faces = 18
+
+Processor 51
+    Number of cells = 24
+    Number of faces shared with processor 23 = 9
+    Number of faces shared with processor 24 = 2
+    Number of faces shared with processor 44 = 11
+    Number of faces shared with processor 50 = 8
+    Number of faces shared with processor 52 = 11
+    Number of processor patches = 5
+    Number of processor faces = 41
+    Number of boundary faces = 17
+
+Processor 52
+    Number of cells = 24
+    Number of faces shared with processor 24 = 8
+    Number of faces shared with processor 25 = 2
+    Number of faces shared with processor 45 = 11
+    Number of faces shared with processor 46 = 1
+    Number of faces shared with processor 51 = 11
+    Number of faces shared with processor 53 = 11
+    Number of processor patches = 6
+    Number of processor faces = 44
+    Number of boundary faces = 18
+
+Processor 53
+    Number of cells = 24
+    Number of faces shared with processor 19 = 1
+    Number of faces shared with processor 25 = 9
+    Number of faces shared with processor 26 = 2
+    Number of faces shared with processor 46 = 11
+    Number of faces shared with processor 52 = 11
+    Number of faces shared with processor 54 = 10
+    Number of processor patches = 6
+    Number of processor faces = 44
+    Number of boundary faces = 18
+
+Processor 54
+    Number of cells = 24
+    Number of faces shared with processor 26 = 4
+    Number of faces shared with processor 47 = 12
+    Number of faces shared with processor 53 = 10
+    Number of faces shared with processor 55 = 8
+    Number of processor patches = 4
+    Number of processor faces = 34
+    Number of boundary faces = 18
+
+Processor 55
+    Number of cells = 24
+    Number of faces shared with processor 27 = 6
+    Number of faces shared with processor 48 = 12
+    Number of faces shared with processor 54 = 8
+    Number of processor patches = 3
+    Number of processor faces = 26
+    Number of boundary faces = 26
+
+Number of processor faces = 1160
+Max number of cells = 24 (5% above average 22.8571)
+Max number of processor patches = 10 (67.6647% above average 5.96429)
+Max number of faces between processors = 58 (40% above average 41.4286)
+
+Processor 0: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor0/0"
+Processor 1: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor1/0"
+Processor 2: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor2/0"
+Processor 3: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor3/0"
+Processor 4: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor4/0"
+Processor 5: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor5/0"
+Processor 6: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor6/0"
+Processor 7: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor7/0"
+Processor 8: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor8/0"
+Processor 9: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor9/0"
+Processor 10: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor10/0"
+Processor 11: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor11/0"
+Processor 12: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor12/0"
+Processor 13: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor13/0"
+Processor 14: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor14/0"
+Processor 15: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor15/0"
+Processor 16: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor16/0"
+Processor 17: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor17/0"
+Processor 18: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor18/0"
+Processor 19: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor19/0"
+Processor 20: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor20/0"
+Processor 21: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor21/0"
+Processor 22: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor22/0"
+Processor 23: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor23/0"
+Processor 24: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor24/0"
+Processor 25: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor25/0"
+Processor 26: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor26/0"
+Processor 27: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor27/0"
+Processor 28: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor28/0"
+Processor 29: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor29/0"
+Processor 30: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor30/0"
+Processor 31: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor31/0"
+Processor 32: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor32/0"
+Processor 33: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor33/0"
+Processor 34: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor34/0"
+Processor 35: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor35/0"
+Processor 36: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor36/0"
+Processor 37: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor37/0"
+Processor 38: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor38/0"
+Processor 39: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor39/0"
+Processor 40: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor40/0"
+Processor 41: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor41/0"
+Processor 42: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor42/0"
+Processor 43: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor43/0"
+Processor 44: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor44/0"
+Processor 45: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor45/0"
+Processor 46: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor46/0"
+Processor 47: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor47/0"
+Processor 48: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor48/0"
+Processor 49: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor49/0"
+Processor 50: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor50/0"
+Processor 51: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor51/0"
+Processor 52: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor52/0"
+Processor 53: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor53/0"
+Processor 54: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor54/0"
+Processor 55: copying "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/0"
+ to "/pfs/data2/home/es/es_es/es_asaramet/OpenFOAM/motorBike/processor55/0"
+
+End
+EOF
