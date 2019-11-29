@@ -34,7 +34,7 @@ char * paragraph(char *text, const char *start, const char *end)
 }
 
 char * ofexec(char *text)
-{
+{ // get OpenFOAM executable from OF output
   char *executable;
   if ((executable = strstr(text, "Exec")) == NULL) return NULL;
   if ((executable = strstr(executable, ": ")) == NULL) return NULL;
@@ -61,4 +61,43 @@ char * dictionary(char *text, const char *name)
     flag = strlen(dct);
   } while(nr_strings(dct, "{") != nr_strings(dct, "}"));
   return dct;
+}
+
+char * dimensions(char *of_units_list)
+{ // text example: [ 0 2 -2 0 0 0 0 ]; should return m^2/s^2
+  if (of_units_list[0] != '[') return NULL;
+  // strip [] and whitespaces
+  of_units_list[strlen(of_units_list) - 2] = '\0';
+  of_units_list = remove_whitespaces(of_units_list+1);
+
+  char *nominator = calloc(21, sizeof(char));
+  char *denominator = calloc(21, sizeof(char));
+  int chr = 0, index = 0;
+  while (of_units_list[chr] != '\0') {
+    if (of_units_list[chr] == '0') {
+      chr++; index++; continue;
+    }
+    if (of_units_list[chr] == '-') {
+      power_to_units(&denominator, index, of_units_list[chr+1]);
+      chr = chr+2; index++; continue;
+    }
+    power_to_units(&nominator, index, of_units_list[chr]);
+    chr++; index++;
+  }
+  if (strlen(nominator) == 0) nominator = "1";
+  if (strlen(denominator) == 0) return nominator;
+
+  char *converted = calloc(strlen(nominator) + strlen(denominator) + 1, sizeof(char));
+  sprintf(converted, "%s/%s", nominator, denominator);
+  return converted; //"m^2/s^2";
+}
+
+void power_to_units(char **appendto_list, int index, char power)
+{
+  const char *units[7] = {"kg", "m", "s", "K", "mol", "A", "cd"};
+  char *of_unit = calloc(7, sizeof(char));
+  sprintf(of_unit, "%s^%c", units[index], power);
+  if (strlen(*appendto_list) == 0) {
+    *appendto_list = of_unit;
+  } else strcat(*appendto_list, of_unit);
 }

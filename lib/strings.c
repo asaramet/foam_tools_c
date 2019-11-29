@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include "strings.h"
 
 /* cut tail from text. Return new text without tail */
@@ -40,9 +41,25 @@ char *text_segment(const char *text, const long start_index, long end_index)
   return data;
 }
 
+/* position of subtext in text */
 long position(const char *text, const char *subtext)
 {
   char *got;
   if ((got = strstr(text, subtext)) == NULL) return -1;
   return strlen(text) - strlen(got);
+}
+
+char *remove_whitespaces(const char *text)
+{
+  char *output = calloc(strlen(text), sizeof(char));
+  int chr = 0, index = 0;
+  while (text[chr] != '\0') {
+    if (!isspace(text[chr])) {
+      output[index] = text[chr];
+      index ++;
+    }
+    chr++;
+  }
+  output[index] = '\0';
+  return output;
 }

@@ -41,6 +41,9 @@ static char * all_tests() {
   two_run_test(test_strings, "uniform 0.24", keyvalue(segment, "internalField"));
   two_run_test(test_null, NULL, keyvalue(segment, "boundaryField"));
   two_run_test(test_null, NULL, keyvalue(segment, "more"));
+  two_run_test(test_strings, "[ 0 2 -2 0 0 0 0 ]", keyvalue(segment, "dimensions"));
+  two_run_test(test_strings, "m^2/s^2", dimensions(keyvalue(segment, "dimensions")));
+  two_run_test(test_strings, "02-20000]", remove_whitespaces(keyvalue(segment, "dimensions")+1));
 
   two_run_test(test_strings, "processor", keyvalue(dictionary(segment, "processor"), "type"));
 

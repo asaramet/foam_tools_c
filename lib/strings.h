@@ -5,5 +5,6 @@ char *cut_tail(char *text, char *tail);
 int nr_strings(char *text, char *string);
 char *text_segment(const char *text, const long start, long end);
 long position(const char *text, const char *subtext);
+char *remove_whitespaces(const char *text);
 
 #endif // _STRINGS_H_
