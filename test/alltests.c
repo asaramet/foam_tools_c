@@ -51,6 +51,10 @@ static char * all_tests() {
   two_run_test(test_strings, "decomposePar", ofexec(cmd_out("decomposePar")));
   two_run_test(test_strings, "simpleFoam", ofexec(cmd_out("simpleFoam")));
 
+  segment = cmd_out("patchSummary");
+  char *paragraph_string = "Valid fields:\n\tvolScalarField	nut\n\tvolVectorField	U\n\tvolScalarField	k\n\tvolScalarField	p\n\tvolScalarField	omega\n";
+  two_run_test(test_strings, paragraph_string, paragraph(segment, "Valid fields", "\n\n"));
+
   free(segment);
   return 0;
 }

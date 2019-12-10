@@ -24,15 +24,6 @@ char * keyvalue(char *text, const char *keyword)
   return found + i;
 }
 
-char * paragraph(char *text, const char *start, const char *end)
-{
-  //char *segment;
-
-  //if ((segment = strstr(text, start)) == NULL) return NULL;
-  //return segment;
-  return text;
-}
-
 char * ofexec(char *text)
 { // get OpenFOAM executable from OF output
   char *executable;
@@ -63,6 +54,20 @@ char * dictionary(char *text, const char *name)
   return dct;
 }
 
+char * paragraph(char *text, const char *start, const char *end)
+{
+  char *segment, *tail;
+
+  if ((segment = strstr(text, start)) == NULL) return NULL;
+  if ((tail = strstr(segment, end)) == NULL) return NULL;
+
+  size_t lngth = strlen(segment) - strlen(tail);
+  char *result = calloc(lngth, sizeof(char));
+  strncat(result, segment, lngth);
+  
+  return result;
+}
+
 char * dimensions(char *of_units_list)
 { // text example: [ 0 2 -2 0 0 0 0 ]; should return m^2/s^2
   if (of_units_list[0] != '[') return NULL;
@@ -87,9 +92,9 @@ char * dimensions(char *of_units_list)
   if (strlen(nominator) == 0) nominator = "1";
   if (strlen(denominator) == 0) return nominator;
 
-  char *converted = calloc(strlen(nominator) + strlen(denominator) + 1, sizeof(char));
+  char *converted = calloc(strlen(nominator) + strlen(denominator) + 2, sizeof(char));
   sprintf(converted, "%s/%s", nominator, denominator);
-  return converted; //"m^2/s^2";
+  return converted;
 }
 
 void power_to_units(char **appendto_list, int index, char power)
