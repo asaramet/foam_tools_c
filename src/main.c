@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "initials.h"
 #include "../lib/run.h"
+#include "../lib/get.h"
 
 static void help(char *progname)
 {
@@ -39,6 +40,9 @@ static void report(char *caseFolder)
 }
 
 int main(int argc, char *argv[]) {
+  update_path(strcat(getenv("PWD"), "/test/cmds")); // TODO remove this in production
+  if (*cmd_out("foamVersion") == EXIT_FAILURE) exit(EXIT_FAILURE);
+
   char *caseFolder;
   if (argc < 2) caseFolder = getenv("PWD");
   for (int i = 1; i < argc; i++){
@@ -57,7 +61,6 @@ int main(int argc, char *argv[]) {
       return 0;
     }
   }
-  update_path(strcat(getenv("PWD"), "/test/cmds")); // TODO remove this in production
   report(caseFolder);
   printf("report.txt created!\n");
   return 1;

@@ -5,8 +5,6 @@
 #include "get.h"
 #include "strings.h"
 
-#define handle_error(msg) \
-  do { perror(msg); exit(EXIT_FAILURE); } while (0)
 #define error_null(msg) \
   do { perror(msg); return NULL; } while (0)
 
@@ -64,7 +62,7 @@ char * paragraph(char *text, const char *start, const char *end)
   size_t lngth = strlen(segment) - strlen(tail);
   char *result = calloc(lngth, sizeof(char));
   strncat(result, segment, lngth);
-  
+
   return result;
 }
 

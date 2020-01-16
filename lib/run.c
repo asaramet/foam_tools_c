@@ -9,13 +9,16 @@
 char *cmd_out(char *command)
 {
   FILE *cmdpt = popen(command, "r");
+  if (cmdpt == NULL) handle_error("Failed popen");
+
+
   char *data = (char *) calloc(1, sizeof(char));
   char *streamline = NULL;
   size_t dlength, slength, strlength = 0;
 
-  if (cmdpt == NULL) handle_error("Failed popen");
 
   while(getline(&streamline, &strlength, cmdpt) != -1) {
+
     dlength = strlen(data);
     slength = strlen(streamline);
     if ((data = (char *) realloc(data, (dlength + slength + sizeof(char)))) == NULL) {
