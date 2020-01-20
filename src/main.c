@@ -42,7 +42,14 @@ int isOption(char *value) {
     if (strcmp(options[i], value) == 0) return 1;
     i++;
   }
-  return 0;
+  return EXIT_SUCCESS;
+}
+
+int do_all(FILE *fp, char *caseFolder) {
+  // TODO: check if you need to verify if functions exited with success
+  general(fp, caseFolder);
+  initials(fp, caseFolder);
+  return EXIT_SUCCESS;
 }
 
 int main(int argc, char *argv[]) {
@@ -75,13 +82,19 @@ int main(int argc, char *argv[]) {
     }
   }
 
+  // TODO: find a better way to handle arguments: -g -i -a is overdoing it, -gi doesn't work
   for (char **pargv = argv+1; *pargv != argv[argc]; pargv++) {
     if (strcmp(*pargv, "-h") == 0 || strcmp(*pargv, "--help") == 0) {
       help(argv[0]);
-      return 0;
-    } else if (strcmp(*pargv, "-g") == 0) {
+      fclose(outputFile);
+      return EXIT_SUCCESS;
+    } else if (strcmp(*pargv, "-a") == 0 || strcmp(*pargv, "--all") == 0) {
+      do_all(outputFile, caseFolder);
+      fclose(outputFile);
+      return EXIT_SUCCESS;
+    } else if (strcmp(*pargv, "-g") == 0 || strcmp(*pargv, "--general") == 0) {
       general(outputFile, caseFolder);
-    } else if (strcmp(*pargv, "-i") == 0) {
+    } else if (strcmp(*pargv, "-i") == 0 || strcmp(*pargv, "--initials") == 0) {
       initials(outputFile, caseFolder);
     }
   }
