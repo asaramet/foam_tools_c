@@ -3,7 +3,7 @@ CC = gcc -Wall -g
 LIBSRC = lib/get.c lib/run.c lib/strings.c
 LIBOBJ= ${LIBSRC:%.c=%.o}
 
-SRC = src/initials.c src/main.c
+SRC = src/general.c src/initials.c src/main.c
 OBJ = ${SRC:%.c=%.o}
 
 TESTSRC = test/alltests.c
