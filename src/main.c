@@ -2,6 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <unistd.h>
+#include <ctype.h>
 #include "initials.h"
 #include "general.h"
 #include "../lib/run.h"
@@ -13,24 +15,25 @@ static void help(char *progname)
   "\tUsage: ";
   printf("%s%s", text, progname);
   text = " [OPTIONS]\n\n\tOPTIONS:\n"
-  "\t   _\t\t\t\t\t\tCollect all data into 'report.txt'\n"
-  "\t  -h, --help\t\t\t\t\tShow this message\n"
-  "\t  -g, --general\t\t\t\t\tShow general data\n"
-  "\t  -i, --initials\t\t\t\tPre-process initial conditions\n"
-  "\t  -f [FOLDER PATH], --folder [FOLDER PATH]\tSpecify case folder as a string \"FOLDER PATH\""
-  ", if -f missing FOLDER PATH = current path\n\n"
-  "\t  -w [REPORT FILE], --write [REPORT FILE]\tSpecify report data file name as a string \"REPORT FILE\""
-  ", if -w missing REPORT FILE = standart output (stdout)\n"
+  "\t  -h\t\t\t\tShow this message\n"
+  "\t  -g\t\t\t\tCollect general data\n"
+  "\t  -i\t\t\t\tPre-process initial conditions\n"
+  "\t  -a\t\t\t\tCollect all data\n"
+  "\t  -f [FOLDER PATH]\t\tSpecify case folder as a string [FOLDER PATH]"
+  ". If this option is not specified, the app will run on current path ($PWD)\n"
+  "\t  -w [REPORT FILE]\t\tSpecify report data file name as a string [REPORT FILE]"
+  ". If this option is not specified data will be displayed on standart output (stdout)\n\n"
+  "\t NOTE: -w and -f should be specified before any other options!\n\n"
   "\tEXAMPLES:\n"
-  "\t  Get initial/boundary conditions data from ${HOME}/OpenFOAM/myCase:\n\n"
+  "\t  Display initial/boundary conditions data from ${HOME}/OpenFOAM/myCase:\n\n"
   "\t    ";
   printf("%s%s", text, progname);
-  text = " -i -f ${HOME}/OpenFOAM/myCase\n\n";
+  text = " -f ${HOME}/OpenFOAM/myCase -i\n\n";
   printf("%s", text);
   text = "\t  Collect all data from case ${HOME}/OpenFOAM/myCase into 'report.txt':\n\n"
   "\t    ";
   printf("%s%s", text, progname);
-  text = " -f ${HOME}/OpenFOAM/myCase -w report.txt\n\n";
+  text = " -f ${HOME}/OpenFOAM/myCase -w report.txt -a\n\n";
   printf("%s", text);
 }
 
@@ -55,49 +58,63 @@ int do_all(FILE *fp, char *caseFolder) {
 int main(int argc, char *argv[]) {
   update_path(strcat(getenv("PWD"), "/test/cmds")); // TODO remove this in production
 
+  if (argc == 1) {
+    help(argv[0]);
+    return EXIT_FAILURE;
+  }
+
   if (*cmd_out("foamVersion") == EXIT_FAILURE) {
     printf("ERROR: OpenFOAM not found on the system!\n");
-    exit(EXIT_FAILURE);
+    return EXIT_FAILURE;
   }
 
   FILE *outputFile = stdout; // output to file or stdout
   char *caseFolder = getenv("PWD"); // define caseFolder
-  for (int i = 1; i < argc; i++){
-    if (strcmp(argv[i], "-w") == 0 || strcmp(argv[i], "--write") == 0) {
-      if (argv[i+1] == NULL || isOption(argv[i+1]) == 1) {
-        printf("ERROR: Output file asked but not specified! Got: %s\n", argv[i+1]);
-        exit(EXIT_FAILURE);
-      };
-      outputFile = fopen(argv[i+1], "w");
-    }
-    if (strcmp(argv[i], "-f") == 0 || strcmp(argv[i], "--folder") == 0) {
-      struct stat stats;
-      stat(argv[i+1], &stats);
-      if (argv[i+1] == NULL || isOption(argv[i+1]) == 1 || !S_ISDIR(stats.st_mode)) {
-        printf("ERROR: Specified case folder, %s, doesn't exist!\n", argv[i+1]);
+  struct stat stats;
+  int opt;
+  while ((opt = getopt(argc, argv, "hagiw:f:")) != -1) {
+    switch (opt) {
+      case 'w':
+        outputFile = fopen(optarg, "w");
+        break;
+      case 'f':
+        stat(optarg, &stats);
+        if (!S_ISDIR(stats.st_mode)) {
+          fprintf(stderr, "ERROR: specified folder %s, doesn't exist!\n", optarg);
+          fclose(outputFile);
+          return EXIT_FAILURE;
+        }
+        caseFolder = optarg;
+        break;
+      case 'h':
+        help(argv[0]);
+        break;
+      case 'a':
+        do_all(outputFile, caseFolder);
+        break;
+      case 'g':
+        general(outputFile, caseFolder);
+        break;
+      case 'i':
+        initials(outputFile, caseFolder);
+        break;
+      case '?':
+        if (optopt == 'w')
+          fprintf(stderr, "ERROR: Output file is not specified with '-%c'.\n", optopt);
+        else if (optopt == 'f')
+          fprintf(stderr, "ERROR: OpenFOAM case folder is not specified with '-%c'\n", optopt);
+        else if (isprint(optopt))
+          fprintf(stderr, "ERROR: Unknown option '-%c'.\n", optopt);
+        else
+          fprintf(stderr, "Unknown option character '\\x%x'.\n", optopt);
         fclose(outputFile);
-        exit(EXIT_FAILURE);
-      }
-      caseFolder = argv[i+1];
+        return EXIT_FAILURE;
+      default:
+        abort();
     }
   }
-
-  // TODO: find a better way to handle arguments: -g -i -a is overdoing it, -gi doesn't work
-  for (char **pargv = argv+1; *pargv != argv[argc]; pargv++) {
-    if (strcmp(*pargv, "-h") == 0 || strcmp(*pargv, "--help") == 0) {
-      help(argv[0]);
-      fclose(outputFile);
-      return EXIT_SUCCESS;
-    } else if (strcmp(*pargv, "-a") == 0 || strcmp(*pargv, "--all") == 0) {
-      do_all(outputFile, caseFolder);
-      fclose(outputFile);
-      return EXIT_SUCCESS;
-    } else if (strcmp(*pargv, "-g") == 0 || strcmp(*pargv, "--general") == 0) {
-      general(outputFile, caseFolder);
-    } else if (strcmp(*pargv, "-i") == 0 || strcmp(*pargv, "--initials") == 0) {
-      initials(outputFile, caseFolder);
-    }
-  }
+  for (int index = optind; index < argc; index++)
+    printf("WARNING: Non-option argument, '%s'\n", argv[index]);
   fclose(outputFile);
   return EXIT_SUCCESS;
 }
